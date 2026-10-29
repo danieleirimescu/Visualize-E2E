@@ -1,0 +1,27 @@
+{
+  "name": "visualize",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Visualize: sito dimostrativo di prenotazione biglietti del cinema con release a difetti seminati, SUT per la pipeline LABBGEN.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "check:catalog": "node scripts/check-catalog.mjs",
+    "check:scout": "node scripts/scout-steps.mjs",
+    "oracle": "node scripts/oracle.mjs",
+    "mutants": "node scripts/mutants.mjs",
+    "release:new": "node scripts/new-release.mjs",
+    "release:publish": "node scripts/publish.mjs",
+    "profile:export": "node scripts/export-profile.mjs",
+    "score": "node scripts/score.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.60.0",
+    "@types/node": "22.9.0",
+    "typescript": "5.6.3",
+    "vite": "5.4.11"
+  }
+}

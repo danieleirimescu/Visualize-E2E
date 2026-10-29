@@ -1,0 +1,755 @@
+{
+  "_doc": "Catalogo delle mutazioni di Visualize. kind=bug: difetto vero, viola la frase 'rule' del profilo (copiata parola per parola, cosi' il triage del Reflector la puo' citare). kind=timing: rende l'app lenta o instabile senza violare una regola. kind=change: modifica legittima (selettori, testi, layout) che NON e' un difetto. level: L1 evidente sul percorso principale, L2 serve una combinazione o un percorso secondario, L3 stato fra pagine, L4 caso limite di una regola, L5 corsa o intermittenza. signals: test id (o testi, per C02) su cui il difetto si vede; per un change sono i nomi di PRIMA, quelli che un test scritto prima usa ancora. Lo script di valutazione li cerca solo nel ricevuto del test, mai nel suo codice. oracle_tests: test della suite di riferimento che devono fallire, su un'asserzione, con la sola mutazione accesa. collateral_tests: altri test che falliscono con la sola mutazione accesa (scritti da mutants.mjs --full --write-collateral): un test generato che verifica la loro regola cita una regola adiacente.",
+  "entries": [
+    {
+      "id": "B01",
+      "kind": "bug",
+      "level": "L1",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "Il Ridotto Over 65 costa quanto un Intero",
+      "rule": "Il biglietto Ridotto Over 65 costa 7,00 euro.",
+      "observable": "ticket-price del posto con tipologia Ridotto mostra 9,50 € invece di 7,00 € (spettacolo 2D, fila non VIP)",
+      "signals": [
+        "ticket-price-",
+        "summary-tickets",
+        "summary-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B04"
+      ],
+      "oracle_tests": [
+        "prezzo di ogni tipologia di biglietto"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B02",
+      "kind": "bug",
+      "level": "L1",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "Il supplemento 3D non entra nel totale",
+      "rule": "Gli spettacoli in 3D hanno un supplemento di 2,00 euro per ogni biglietto.",
+      "observable": "su uno spettacolo 3D la riga del biglietto include il 3D ma summary-supplements mostra 0,00 € e il totale e' piu' basso di 2,00 € per biglietto",
+      "signals": [
+        "summary-supplements",
+        "summary-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B27"
+      ],
+      "oracle_tests": [
+        "spettacolo 3D: supplemento nel totale"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B03",
+      "kind": "bug",
+      "level": "L1",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "La commissione e' applicata una volta per ordine",
+      "rule": "La commissione di servizio online è di 0,80 euro per ogni biglietto.",
+      "observable": "con 2 o piu' biglietti summary-fee resta 0,80 €",
+      "signals": [
+        "summary-fee",
+        "summary-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B07",
+        "B10"
+      ],
+      "oracle_tests": [
+        "commissione per ogni biglietto"
+      ],
+      "collateral_tests": [
+        "prezzo di ogni tipologia di biglietto",
+        "sconto VISUALIZE15 esclusa la commissione",
+        "pagamento in cassa senza commissione",
+        "carta regalo: formato, scaduta, saldo ridotto",
+        "le mie prenotazioni con data e ora dello spettacolo"
+      ]
+    },
+    {
+      "id": "B04",
+      "kind": "bug",
+      "level": "L1",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "Il prezzo Studente diventa NaN",
+      "rule": "Il biglietto Studente costa 7,50 euro.",
+      "observable": "scegliendo Studente il prezzo della riga e il totale mostrano NaN €",
+      "signals": [
+        "ticket-price-",
+        "summary-total",
+        "NaN"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B01",
+        "B27"
+      ],
+      "oracle_tests": [
+        "prezzo di ogni tipologia di biglietto"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B05",
+      "kind": "bug",
+      "level": "L1",
+      "page": "posti",
+      "workflow": "w-mappa-posti",
+      "title": "Il contatore dei posti e' indietro di uno",
+      "rule": "Il contatore dei posti selezionati mostra esattamente quanti posti sono selezionati.",
+      "observable": "con 2 o piu' posti selezionati selected-count mostra un posto in meno",
+      "signals": [
+        "selected-count"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B08"
+      ],
+      "oracle_tests": [
+        "selezione e deselezione aggiornano contatore ed elenco"
+      ],
+      "collateral_tests": [
+        "tornare ai posti mantiene la selezione"
+      ]
+    },
+    {
+      "id": "B06",
+      "kind": "bug",
+      "level": "L2",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "Il codice promozionale si cumula",
+      "rule": "Un codice promozionale si applica una sola volta per prenotazione.",
+      "observable": "applicando VISUALIZE15 due volte lo sconto raddoppia e il messaggio non dice che e' gia' applicato",
+      "signals": [
+        "promo-message",
+        "summary-discount",
+        "summary-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B07",
+        "B27"
+      ],
+      "oracle_tests": [
+        "codice promozionale applicato una sola volta"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B07",
+      "kind": "bug",
+      "level": "L2",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "Lo sconto si applica anche alla commissione",
+      "rule": "Il codice promozionale VISUALIZE15 riduce del 15 per cento la somma di biglietti e supplementi, esclusa la commissione di servizio.",
+      "observable": "summary-discount e' il 15% di biglietti + supplementi + commissione",
+      "signals": [
+        "summary-discount",
+        "summary-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B03",
+        "B06",
+        "B27"
+      ],
+      "oracle_tests": [
+        "sconto VISUALIZE15 esclusa la commissione"
+      ],
+      "collateral_tests": [
+        "codice promozionale applicato una sola volta",
+        "arrotondamento dello sconto",
+        "conferma con lo stesso totale pagato"
+      ]
+    },
+    {
+      "id": "B08",
+      "kind": "bug",
+      "level": "L2",
+      "page": "posti",
+      "workflow": "w-mappa-posti",
+      "title": "Si possono selezionare 10 posti",
+      "rule": "Si possono selezionare al massimo 8 posti per prenotazione.",
+      "observable": "il nono e il decimo posto vengono selezionati senza messaggio di errore",
+      "signals": [
+        "selected-count",
+        "seat-error"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B05"
+      ],
+      "oracle_tests": [
+        "al massimo 8 posti"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B09",
+      "kind": "bug",
+      "level": "L2",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "La tariffa Bambini e' offerta per un film VM14",
+      "rule": "Per i film vietati ai minori di 14 anni la tariffa Bambini non è disponibile.",
+      "observable": "la select ticket-type di uno spettacolo VM14 contiene l'opzione Bambini",
+      "signals": [
+        "ticket-type-"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "film VM14 senza tariffa Bambini"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B10",
+      "kind": "bug",
+      "level": "L2",
+      "page": "checkout",
+      "workflow": "w-metodi-pagamento",
+      "title": "Il pagamento in cassa mantiene la commissione",
+      "rule": "Con il pagamento in cassa la commissione di servizio non si applica.",
+      "observable": "scegliendo Paga in cassa summary-fee resta 0,80 € per biglietto",
+      "signals": [
+        "summary-fee",
+        "summary-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B03"
+      ],
+      "oracle_tests": [
+        "pagamento in cassa senza commissione"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B11",
+      "kind": "bug",
+      "level": "L2",
+      "page": "checkout",
+      "workflow": "w-metodi-pagamento",
+      "title": "Il pagamento in cassa e' disponibile fino a 6 biglietti",
+      "rule": "Il pagamento in cassa è disponibile solo per prenotazioni fino a 4 biglietti.",
+      "observable": "con 5 o 6 biglietti l'opzione payment-method-cassa e' abilitata",
+      "signals": [
+        "payment-method-cassa",
+        "cassa-unavailable"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B16"
+      ],
+      "oracle_tests": [
+        "pagamento in cassa solo fino a 4 biglietti"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B12",
+      "kind": "bug",
+      "level": "L2",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "Le poltrone VIP non hanno supplemento",
+      "rule": "I posti della fila H sono poltrone VIP con un supplemento di 3,00 euro per posto.",
+      "observable": "un posto della fila H costa come un posto normale",
+      "signals": [
+        "ticket-price-H",
+        "summary-supplements",
+        "summary-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "supplemento poltrona VIP"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B13",
+      "kind": "bug",
+      "level": "L2",
+      "page": "checkout",
+      "workflow": "w-metodi-pagamento",
+      "title": "La carta regalo paga anche oltre il saldo",
+      "rule": "Se il saldo della carta regalo non copre il totale il pagamento viene rifiutato.",
+      "observable": "GIFT-1000-0000-0002 (10,00 €) paga un ordine da piu' di 10,00 € e si arriva alla conferma",
+      "signals": [
+        "payment-error",
+        "booking-code"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "carta regalo con saldo insufficiente"
+      ],
+      "collateral_tests": [
+        "carta regalo: formato, scaduta, saldo ridotto"
+      ]
+    },
+    {
+      "id": "B14",
+      "kind": "bug",
+      "level": "L2",
+      "page": "programmazione",
+      "workflow": "w-programmazione",
+      "title": "Il filtro 3D lascia passare gli spettacoli 2D",
+      "rule": "Il filtro per formato mostra soltanto gli spettacoli del formato scelto.",
+      "observable": "con formato 3D compare anche lo spettacolo 2D delle 15:00 di Ultimo treno per Orione",
+      "signals": [
+        "showtime-ultimo-treno-per-orione-1500",
+        "filter-format"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "filtro per formato 3D"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B15",
+      "kind": "bug",
+      "level": "L2",
+      "page": "film",
+      "workflow": "w-scheda-film",
+      "title": "La scheda dei film oltre le due ore mostra 10 minuti in meno",
+      "rule": "La durata di un film è la stessa nella programmazione e nella sua scheda.",
+      "observable": "Luci di Marte: 131 min nella programmazione, 121 min nella scheda",
+      "signals": [
+        "film-duration"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "durata uguale fra programmazione e scheda"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B16",
+      "kind": "bug",
+      "level": "L3",
+      "page": "posti",
+      "workflow": "w-mappa-posti",
+      "title": "Cambiando spettacolo restano i posti del precedente",
+      "rule": "Scegliendo un altro spettacolo la selezione dei posti precedente viene azzerata.",
+      "observable": "dopo aver scelto A5 su uno spettacolo e aperto un altro spettacolo, A5 e' gia' selezionato",
+      "signals": [
+        "selected-count",
+        "selected-seats",
+        "seat-"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B17",
+        "B11"
+      ],
+      "oracle_tests": [
+        "un altro spettacolo azzera la selezione"
+      ],
+      "collateral_tests": [
+        "pagamento in cassa solo fino a 4 biglietti"
+      ]
+    },
+    {
+      "id": "B17",
+      "kind": "bug",
+      "level": "L3",
+      "page": "posti",
+      "workflow": "w-biglietti",
+      "title": "Tornando ai posti la selezione si perde",
+      "rule": "Tornando dalla pagina dei biglietti alla mappa dei posti la selezione resta invariata.",
+      "observable": "dai biglietti, Torna ai posti mostra zero posti selezionati",
+      "signals": [
+        "selected-count",
+        "selected-seats",
+        "tickets-back"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B16"
+      ],
+      "oracle_tests": [
+        "tornare ai posti mantiene la selezione"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B18",
+      "kind": "bug",
+      "level": "L3",
+      "page": "posti",
+      "workflow": "w-prenotazioni",
+      "title": "I posti prenotati restano liberi",
+      "rule": "I posti di una prenotazione confermata o da pagare in cassa risultano occupati per quello spettacolo.",
+      "observable": "dopo aver prenotato A5, la mappa dello stesso spettacolo mostra A5 libero",
+      "signals": [
+        "seat-"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B21"
+      ],
+      "oracle_tests": [
+        "i posti prenotati risultano occupati"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B19",
+      "kind": "bug",
+      "level": "L3",
+      "page": "conferma",
+      "workflow": "w-pagamento-carta",
+      "title": "La conferma mostra il totale senza sconto",
+      "rule": "Il totale mostrato nella pagina di conferma coincide con il totale pagato.",
+      "observable": "con VISUALIZE15 booking-total in conferma e' piu' alto del summary-total pagato",
+      "signals": [
+        "booking-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B06",
+        "B07"
+      ],
+      "oracle_tests": [
+        "conferma con lo stesso totale pagato"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B20",
+      "kind": "bug",
+      "level": "L3",
+      "page": "prenotazioni",
+      "workflow": "w-prenotazioni",
+      "title": "Le mie prenotazioni mostra il giorno precedente",
+      "rule": "La pagina Le mie prenotazioni mostra la stessa data e la stessa ora dello spettacolo prenotato.",
+      "observable": "booking-date in Le mie prenotazioni e' il giorno prima di quello prenotato",
+      "signals": [
+        "booking-date"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B22"
+      ],
+      "oracle_tests": [
+        "le mie prenotazioni con data e ora dello spettacolo"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B21",
+      "kind": "bug",
+      "level": "L3",
+      "page": "prenotazioni",
+      "workflow": "w-prenotazioni",
+      "title": "Annullare non libera i posti",
+      "rule": "Annullando una prenotazione i suoi posti tornano liberi.",
+      "observable": "dopo l'annullamento la mappa dello stesso spettacolo mostra ancora i posti occupati",
+      "signals": [
+        "booking-status",
+        "booking-cancel"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B18"
+      ],
+      "oracle_tests": [
+        "annullare libera i posti"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B22",
+      "kind": "bug",
+      "level": "L3",
+      "page": "programmazione",
+      "workflow": "w-programmazione",
+      "title": "Dalle schede successive a oggi si apre lo spettacolo del giorno dopo",
+      "rule": "Lo spettacolo aperto dalla programmazione è quello del giorno e dell'ora scelti.",
+      "observable": "cliccando un orario nella scheda Domani, show-datetime riporta la data di dopodomani; dalla scheda dell'ultimo giorno l'orario porta a Spettacolo non trovato",
+      "signals": [
+        "show-datetime",
+        "day-tab-"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B20"
+      ],
+      "oracle_tests": [
+        "l'orario di domani apre lo spettacolo di domani"
+      ],
+      "collateral_tests": [
+        "le mie prenotazioni con data e ora dello spettacolo"
+      ]
+    },
+    {
+      "id": "B23",
+      "kind": "bug",
+      "level": "L4",
+      "page": "posti",
+      "workflow": "w-mappa-posti",
+      "title": "Il posto singolo isolato non e' bloccato",
+      "rule": "Una selezione non può lasciare un singolo posto libero fra due posti occupati o selezionati della stessa fila.",
+      "observable": "selezionando A1 e A3 si prosegue ai biglietti lasciando A2 isolato",
+      "signals": [
+        "seat-error",
+        "seats-continue"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "nessun posto singolo isolato"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B24",
+      "kind": "bug",
+      "level": "L4",
+      "page": "posti",
+      "workflow": "w-mappa-posti",
+      "title": "Uno spettacolo iniziato da meno di 15 minuti e' ancora prenotabile",
+      "rule": "Uno spettacolo già iniziato non è prenotabile.",
+      "observable": "nei primi 15 minuti dall'inizio l'orario resta un link e la mappa si apre. Rilevabile solo da una run che cade nei 15 minuti dopo l'inizio di uno spettacolo di oggi: in pratica raro senza controllo dell'orologio",
+      "signals": [
+        "show-unavailable",
+        "showtime-"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "spettacolo appena iniziato non prenotabile"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B25",
+      "kind": "bug",
+      "level": "L4",
+      "page": "checkout",
+      "workflow": "w-pagamento-carta",
+      "title": "Una carta che scade nel mese corrente e' considerata scaduta",
+      "rule": "Una carta che scade nel mese corrente è ancora valida.",
+      "observable": "con scadenza MM/AA del mese corrente compare card-expiry-error La carta è scaduta",
+      "signals": [
+        "card-expiry-error"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "carta che scade nel mese corrente"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B26",
+      "kind": "bug",
+      "level": "L4",
+      "page": "checkout",
+      "workflow": "w-pagamento-carta",
+      "title": "Il CVV a 4 cifre di American Express viene rifiutato",
+      "rule": "Le carte American Express iniziano con 34 o 37, hanno 15 cifre e un codice di sicurezza di 4 cifre.",
+      "observable": "con 3782 822463 10005 e CVV 1234 compare card-cvv-error",
+      "signals": [
+        "card-cvv-error"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "carta American Express"
+      ],
+      "collateral_tests": []
+    },
+    {
+      "id": "B27",
+      "kind": "bug",
+      "level": "L4",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "Lo sconto e' arrotondato per difetto biglietto per biglietto",
+      "rule": "Lo sconto è calcolato una sola volta sulla somma di biglietti e supplementi e arrotondato al centesimo, con i mezzi centesimi arrotondati per eccesso.",
+      "observable": "un Intero 2D con VISUALIZE15: sconto 1,42 € invece di 1,43 €",
+      "signals": [
+        "summary-discount",
+        "summary-total"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [
+        "B02",
+        "B04",
+        "B06",
+        "B07"
+      ],
+      "oracle_tests": [
+        "arrotondamento dello sconto"
+      ],
+      "collateral_tests": [
+        "codice promozionale applicato una sola volta",
+        "sconto VISUALIZE15 esclusa la commissione",
+        "conferma con lo stesso totale pagato"
+      ]
+    },
+    {
+      "id": "B28",
+      "kind": "bug",
+      "level": "L5",
+      "page": "checkout",
+      "workflow": "w-pagamento-carta",
+      "title": "Il pulsante di pagamento non si disabilita e un doppio click prenota due volte",
+      "rule": "Un pagamento approvato crea una sola prenotazione.",
+      "observable": "dopo un doppio click su pay-button Le mie prenotazioni elenca due prenotazioni identiche (e il pulsante non risulta disabilitato durante il pagamento)",
+      "signals": [
+        "booking-item",
+        "pay-button"
+      ],
+      "expected_triage": "sut_bug",
+      "incompatible_with": [],
+      "oracle_tests": [
+        "un pagamento crea una sola prenotazione"
+      ],
+      "collateral_tests": [
+        "pulsante di pagamento disabilitato durante il pagamento"
+      ]
+    },
+    {
+      "id": "T01",
+      "kind": "timing",
+      "level": "L5",
+      "page": "posti",
+      "workflow": "w-mappa-posti",
+      "title": "La mappa dei posti compare dopo 2,5-6 secondi",
+      "rule": null,
+      "observable": "seatmap-loading resta a schermo per un tempo casuale, a volte oltre il timeout di default delle asserzioni. Anche lo Scout aspetta al massimo 5 secondi per elemento: con T01 attivo una parte delle esplorazioni si ferma al primo posto e i workflow concatenati non partono",
+      "signals": [
+        "seatmap-loading",
+        "seat-"
+      ],
+      "expected_triage": "environment_issue",
+      "incompatible_with": [],
+      "oracle_tests": [],
+      "collateral_tests": [
+        "supplemento poltrona VIP",
+        "carta regalo: formato, scaduta, saldo ridotto",
+        "posti occupati fissi non selezionabili",
+        "un altro spettacolo azzera la selezione",
+        "tornare ai posti mantiene la selezione",
+        "i posti prenotati risultano occupati",
+        "annullare libera i posti"
+      ]
+    },
+    {
+      "id": "C01",
+      "kind": "change",
+      "level": "L2",
+      "page": "posti",
+      "workflow": "w-mappa-posti",
+      "title": "Test id rinominati su mappa e biglietti",
+      "rule": null,
+      "observable": "seat-X diventa posto-X, seats-continue diventa seats-next, tickets-continue diventa tickets-next",
+      "signals": [
+        "seats-continue",
+        "tickets-continue",
+        "seat-A",
+        "seat-B",
+        "seat-C",
+        "seat-D",
+        "seat-E",
+        "seat-F",
+        "seat-G",
+        "seat-H"
+      ],
+      "expected_triage": "selector_issue",
+      "incompatible_with": [],
+      "oracle_tests": [],
+      "collateral_tests": [
+        "prezzo di ogni tipologia di biglietto",
+        "il numero di biglietti è uguale ai posti",
+        "spettacolo 3D: supplemento nel totale",
+        "commissione per ogni biglietto",
+        "codice promozionale applicato una sola volta",
+        "codice promozionale non valido",
+        "sconto VISUALIZE15 esclusa la commissione",
+        "arrotondamento dello sconto",
+        "film VM14 senza tariffa Bambini",
+        "supplemento poltrona VIP",
+        "campi obbligatori e email di conferma",
+        "numero di carta non valido",
+        "carte rifiutate e 3D Secure",
+        "carta che scade nel mese corrente",
+        "carta American Express",
+        "pagamento in cassa senza commissione",
+        "pagamento in cassa solo fino a 4 biglietti",
+        "carta regalo con saldo insufficiente",
+        "carta regalo: formato, scaduta, saldo ridotto",
+        "un pagamento crea una sola prenotazione",
+        "pulsante di pagamento disabilitato durante il pagamento",
+        "conferma con lo stesso totale pagato",
+        "selezione e deselezione aggiornano contatore ed elenco",
+        "posti occupati fissi non selezionabili",
+        "al massimo 8 posti",
+        "nessun posto singolo isolato",
+        "un altro spettacolo azzera la selezione",
+        "tornare ai posti mantiene la selezione",
+        "indicatore di ordine in corso",
+        "le mie prenotazioni con data e ora dello spettacolo",
+        "i posti prenotati risultano occupati",
+        "annullare libera i posti",
+        "annullamento possibile fino a un'ora prima"
+      ]
+    },
+    {
+      "id": "C02",
+      "kind": "change",
+      "level": "L1",
+      "page": "posti",
+      "workflow": "w-mappa-posti",
+      "title": "Testi dei pulsanti riformulati",
+      "rule": null,
+      "observable": "Prosegui diventa Continua, Paga ora diventa Conferma e paga, Applica diventa Usa codice",
+      "signals": [
+        "Prosegui",
+        "Paga ora",
+        "Applica"
+      ],
+      "expected_triage": "selector_issue",
+      "incompatible_with": [],
+      "oracle_tests": [],
+      "collateral_tests": []
+    },
+    {
+      "id": "C03",
+      "kind": "change",
+      "level": "L2",
+      "page": "biglietti",
+      "workflow": "w-biglietti",
+      "title": "Riepilogo rifatto come tabella",
+      "rule": null,
+      "observable": "il riepilogo passa da lista di definizioni a tabella con classi CSS nuove, test id invariati",
+      "signals": [
+        "summary-"
+      ],
+      "expected_triage": "nessun fallimento atteso con selettori basati sui test id",
+      "incompatible_with": [],
+      "oracle_tests": [],
+      "collateral_tests": []
+    }
+  ]
+}

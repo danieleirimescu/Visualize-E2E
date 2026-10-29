@@ -1,0 +1,2 @@
+{ "id": "r00", "based_on": null, "bugs": [], "changes": [], "fixed": [], "reintroduced": [],
+  "notes": "Release pulita: base di riferimento. La prima run della pipeline costruisce la propria suite su un sito corretto." }

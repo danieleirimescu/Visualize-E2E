@@ -1,0 +1,2 @@
+{ "id": "r02", "based_on": "r01", "bugs": ["B01", "B14", "B17", "B20"], "changes": [], "fixed": ["B05"], "reintroduced": [],
+  "notes": "B01 e B14 restano, B05 corretto, nuovi B17 (stato fra pagine) e B20 (data nelle prenotazioni)." }

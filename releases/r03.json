@@ -1,0 +1,2 @@
+{ "id": "r03", "based_on": "r02", "bugs": ["B14", "B17", "B10", "B23"], "changes": [], "fixed": ["B01", "B20"], "reintroduced": [],
+  "notes": "Corretti B01 e B20, nuovi B10 (cassa con commissione) e B23 (posto isolato, caso limite)." }

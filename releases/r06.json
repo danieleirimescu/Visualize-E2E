@@ -1,0 +1,2 @@
+{ "id": "r06", "based_on": "r05", "bugs": ["B01", "B19", "B28"], "changes": ["C01", "C02", "C03"], "fixed": [], "reintroduced": ["B01"],
+  "notes": "Regressione: torna B01 (corretto in r03). Nuovi B19 (totale in conferma) e B28 (doppio pagamento)." }

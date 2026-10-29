@@ -1,0 +1,2 @@
+{ "id": "r04", "based_on": "r03", "bugs": ["B17"], "changes": [], "fixed": ["B14", "B10", "B23"], "reintroduced": [],
+  "notes": "Release di correzione: resta solo B17. Mette alla prova il segnale 'il difetto non si riproduce piu'' sui test protetti." }

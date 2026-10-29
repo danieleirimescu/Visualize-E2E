@@ -1,0 +1,2 @@
+{ "id": "r05", "based_on": "r04", "bugs": [], "changes": ["C01", "C02", "C03"], "fixed": ["B17"], "reintroduced": [],
+  "notes": "Solo refactor legittimi: test id, testi dei pulsanti e layout del riepilogo. Nessun difetto: ogni sut_bug e' un falso positivo. Da qui in poi i cambiamenti restano." }

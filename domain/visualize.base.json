@@ -1,0 +1,147 @@
+{
+  "app_name": "Visualize - prenotazione biglietti del cinema",
+  "description": "Sito dimostrativo di un multisala con tre sale: programmazione di sette giorni, scheda film, scelta dei posti su una mappa della sala, tipologie di biglietto con codice promozionale, checkout con pagamento simulato (carta di credito, carta regalo, pagamento in cassa), conferma e storico delle prenotazioni. Tutti i dati restano nel browser e nessun pagamento e' reale.",
+  "allow_scout_exploration": true,
+  "allow_scout_submit": true,
+
+  "workflows": [
+    {
+      "id": "w-programmazione",
+      "name": "Consultare la programmazione e filtrarla",
+      "expected_behavior": "La home mostra la programmazione di un giorno alla volta, scelto fra sette schede che vanno da oggi a sei giorni dopo. Ogni film mostra titolo, genere, durata, classificazione e gli orari del giorno scelto, ciascuno con formato e sala. Un orario prenotabile porta alla mappa dei posti di quello spettacolo. Lo spettacolo aperto dalla programmazione è quello del giorno e dell'ora scelti. Un orario già iniziato è segnato come Iniziato e un orario tutto esaurito come Esaurito, ed entrambi non sono cliccabili. Il filtro per formato mostra soltanto gli spettacoli del formato scelto. Il filtro per genere mostra soltanto i film del genere scelto. Se nessuno spettacolo corrisponde ai filtri compare un messaggio che lo dice.",
+      "steps": [
+        { "action": "wait_for",     "selector": "[data-testid=\"film-card-il-faro-sommerso\"]" },
+        { "action": "click",        "selector": "[data-testid=\"day-tab-1\"]" },
+        { "action": "wait_for_url", "url_contains": "giorno=1" },
+        { "action": "select",       "selector": "[data-testid=\"filter-format\"]", "value": "3D" },
+        { "action": "wait_for_url", "url_contains": "formato=3D" }
+      ]
+    },
+    {
+      "id": "w-scheda-film",
+      "name": "Aprire la scheda di un film",
+      "expected_behavior": "Cliccando il titolo di un film nella programmazione si apre la sua scheda, con titolo, genere, durata, classificazione, regia, interpreti e trama. La durata di un film è la stessa nella programmazione e nella sua scheda. La scheda elenca gli orari del film per ciascuno dei sette giorni della programmazione, e ogni orario prenotabile porta alla mappa dei posti di quello spettacolo.",
+      "steps": [
+        { "action": "click",        "selector": "[data-testid=\"film-title-luci-di-marte\"]" },
+        { "action": "wait_for_url", "url_contains": "/film/luci-di-marte" },
+        { "action": "wait_for",     "selector": "[data-testid=\"film-schedule-day-1\"]" }
+      ]
+    },
+    {
+      "id": "w-mappa-posti",
+      "name": "Scegliere i posti sulla mappa della sala",
+      "expected_behavior": "La mappa dei posti mostra film, data, ora, sala e formato dello spettacolo e una griglia di posti con legenda. Ogni sala ha otto file, dalla A alla H, di dieci posti ciascuna. Cliccando un posto libero lo si seleziona e cliccandolo di nuovo lo si deseleziona. Cliccando un posto occupato compare un messaggio che dice che il posto è occupato e la selezione non cambia. Il contatore dei posti selezionati mostra esattamente quanti posti sono selezionati. L'elenco dei posti selezionati li riporta in ordine di fila e di numero. Si possono selezionare al massimo 8 posti per prenotazione. Il pulsante per proseguire è disabilitato finché non è selezionato almeno un posto. Una selezione non può lasciare un singolo posto libero fra due posti occupati o selezionati della stessa fila. In quel caso, proseguendo, compare un messaggio di errore e si resta sulla mappa. Uno spettacolo già iniziato non è prenotabile. Per uno spettacolo già iniziato, al posto della mappa compare un messaggio che lo dice.",
+      "steps": [
+        { "action": "click",        "selector": "[data-testid=\"day-tab-1\"]" },
+        { "action": "wait_for_url", "url_contains": "giorno=1" },
+        { "action": "click",        "selector": "[data-testid=\"showtime-luci-di-marte-2030\"]" },
+        { "action": "wait_for_url", "url_contains": "/posti" },
+        { "action": "click",        "selector": "button[aria-label=\"Fila A, posto 5\"]" },
+        { "action": "click",        "selector": "button[aria-label=\"Fila A, posto 6\"]" },
+        { "action": "click",        "selector": "button[aria-label=\"Fila H, posto 6, poltrona VIP\"]" },
+        { "action": "wait_for",     "selector": "[data-testid=\"selected-count\"]" },
+        { "action": "click",        "selector": ".seat-panel button.button" },
+        { "action": "wait_for_url", "url_contains": "/biglietti" }
+      ]
+    },
+    {
+      "id": "w-biglietti",
+      "name": "Scegliere le tipologie di biglietto e applicare un codice promozionale",
+      "continues_from": "w-mappa-posti",
+      "expected_behavior": "La pagina dei biglietti elenca un biglietto per ogni posto selezionato, ciascuno con la propria tipologia, che parte da Intero, e il proprio prezzo comprensivo dei supplementi. Cambiando la tipologia di un biglietto il suo prezzo e il riepilogo si aggiornano subito. Il riepilogo mostra numero di biglietti, prezzo dei biglietti, supplementi, commissione di servizio, sconto e totale. Un codice promozionale valido mostra un messaggio di conferma e lo sconto nel riepilogo. Un codice non valido mostra il messaggio Codice promozionale non valido. Applicando di nuovo un codice già applicato compare il messaggio Il codice è già stato applicato e lo sconto non cambia. Il pulsante per tornare ai posti riporta alla mappa dello stesso spettacolo.",
+      "steps": [
+        { "action": "select",       "selector": "[data-testid=\"ticket-type-A6\"]", "value": "ridotto" },
+        { "action": "select",       "selector": "[data-testid=\"ticket-type-H6\"]", "value": "studente" },
+        { "action": "fill",         "selector": "[data-testid=\"promo-code\"]", "text": "VISUALIZE15" },
+        { "action": "click",        "selector": "[data-testid=\"promo-apply\"]" },
+        { "action": "wait_for",     "selector": "[data-testid=\"promo-message\"]" },
+        { "action": "click",        "selector": ".page--tickets .actions button.button" },
+        { "action": "wait_for_url", "url_contains": "/checkout" }
+      ]
+    },
+    {
+      "id": "w-pagamento-carta",
+      "name": "Inserire i dati e pagare con carta di credito",
+      "continues_from": "w-biglietti",
+      "expected_behavior": "Il checkout chiede i dati dell'acquirente e il metodo di pagamento e mostra a lato il riepilogo dell'ordine. Nome, cognome, email e conferma email sono obbligatori. L'email di conferma deve coincidere con l'email. Il telefono è facoltativo. Per pagare bisogna accettare le condizioni di vendita. Con dati mancanti o non validi, premendo il pulsante di pagamento compaiono i messaggi di errore sotto i campi e il pagamento non parte. Il pagamento con carta di credito chiede titolare, numero, scadenza nel formato MM/AA e codice di sicurezza. Le carte American Express iniziano con 34 o 37, hanno 15 cifre e un codice di sicurezza di 4 cifre. Le altre carte hanno 16 cifre e un codice di sicurezza di 3 cifre. Un numero di carta che non supera il controllo di Luhn è segnalato come non valido. Una carta che scade nel mese corrente è ancora valida. Una carta con scadenza in un mese passato è segnalata come scaduta. La carta 4242 4242 4242 4242 viene sempre approvata. La carta 4000 0000 0000 0002 viene rifiutata con il messaggio Pagamento rifiutato dalla banca. La carta 4000 0000 0000 9995 viene rifiutata con il messaggio Fondi insufficienti. La carta 4000 0000 0000 3220 richiede la verifica 3D Secure, che si supera con il codice 123456. Qualunque altra carta valida viene approvata. Dopo un pagamento approvato si apre la pagina di conferma con un codice di prenotazione.",
+      "steps": [
+        { "action": "fill",         "selector": "[data-testid=\"buyer-first-name\"]", "text": "Ada" },
+        { "action": "fill",         "selector": "[data-testid=\"buyer-last-name\"]", "text": "Lovelace" },
+        { "action": "fill",         "selector": "[data-testid=\"buyer-email\"]", "text": "ada.lovelace@example.com" },
+        { "action": "fill",         "selector": "[data-testid=\"buyer-email-confirm\"]", "text": "ada.lovelace@example.com" },
+        { "action": "check",        "selector": "[data-testid=\"terms-accept\"]" },
+        { "action": "check",        "selector": "[data-testid=\"payment-method-card\"]" },
+        { "action": "fill",         "selector": "[data-testid=\"card-holder\"]", "text": "Ada Lovelace" },
+        { "action": "fill",         "selector": "[data-testid=\"card-number\"]", "text": "4242 4242 4242 4242" },
+        { "action": "fill",         "selector": "[data-testid=\"card-expiry\"]", "text": "12/30" },
+        { "action": "fill",         "selector": "[data-testid=\"card-cvv\"]", "text": "123" },
+        { "action": "click",        "selector": "[data-testid=\"pay-button\"]" },
+        { "action": "wait_for_url", "url_contains": "/conferma" }
+      ]
+    },
+    {
+      "id": "w-prenotazioni",
+      "name": "Consultare e annullare le proprie prenotazioni",
+      "continues_from": "w-pagamento-carta",
+      "expected_behavior": "La pagina di conferma mostra codice di prenotazione, stato, film, data, ora, sala, posti, biglietti, metodo di pagamento e totale. La pagina Le mie prenotazioni elenca le prenotazioni fatte da questo browser, dalla più recente, ciascuna con codice, film, data, ora, sala, posti, totale e stato. Lo stato è Confermata dopo un pagamento con carta o carta regalo, Da pagare in cassa dopo un pagamento in cassa e Annullata dopo un annullamento. Annullare chiede una conferma esplicita, dopo la quale lo stato diventa Annullata. Una prenotazione che non si può più annullare non mostra il pulsante di annullamento.",
+      "steps": [
+        { "action": "goto",         "url": "/prenotazioni" },
+        { "action": "wait_for",     "selector": "[data-testid=\"booking-item\"]" }
+      ]
+    },
+    {
+      "id": "w-metodi-pagamento",
+      "name": "Scegliere carta regalo o pagamento in cassa",
+      "expected_behavior": "Scegliendo un metodo di pagamento compaiono soltanto i campi di quel metodo. La carta regalo si paga inserendo un codice nel formato GIFT-0000-0000-0000. La carta regalo GIFT-5000-0000-0001 ha un saldo iniziale di 50,00 euro. La carta regalo GIFT-1000-0000-0002 ha un saldo iniziale di 10,00 euro. La carta regalo GIFT-0000-0000-0003 è scaduta. Un codice nel formato giusto che non corrisponde a nessuna carta regalo viene rifiutato come inesistente. Se il saldo della carta regalo non copre il totale il pagamento viene rifiutato. Il saldo di una carta regalo si riduce dell'importo pagato. Il pagamento in cassa non chiede altri dati e registra la prenotazione con stato Da pagare in cassa. Quando il pagamento in cassa non è disponibile la sua opzione è disabilitata e un messaggio ne spiega il motivo.",
+      "steps": [
+        { "action": "click",        "selector": "[data-testid=\"day-tab-1\"]" },
+        { "action": "wait_for_url", "url_contains": "giorno=1" },
+        { "action": "click",        "selector": "[data-testid=\"showtime-il-faro-sommerso-2030\"]" },
+        { "action": "wait_for_url", "url_contains": "/posti" },
+        { "action": "click",        "selector": "button[aria-label=\"Fila B, posto 3\"]" },
+        { "action": "click",        "selector": ".seat-panel button.button" },
+        { "action": "wait_for_url", "url_contains": "/biglietti" },
+        { "action": "click",        "selector": ".page--tickets .actions button.button" },
+        { "action": "wait_for_url", "url_contains": "/checkout" },
+        { "action": "check",        "selector": "[data-testid=\"payment-method-gift\"]" },
+        { "action": "wait_for",     "selector": "[data-testid=\"gift-code\"]" },
+        { "action": "check",        "selector": "[data-testid=\"payment-method-cassa\"]" },
+        { "action": "wait_for",     "selector": "[data-testid=\"cassa-note\"]" }
+      ]
+    }
+  ],
+
+  "business_rules": [
+    "Il biglietto Intero costa 9,50 euro.",
+    "Il biglietto Ridotto Over 65 costa 7,00 euro.",
+    "Il biglietto Bambini costa 6,00 euro ed è riservato ai minori di 14 anni.",
+    "Il biglietto Studente costa 7,50 euro.",
+    "Per i film vietati ai minori di 14 anni la tariffa Bambini non è disponibile.",
+    "Gli spettacoli in 3D hanno un supplemento di 2,00 euro per ogni biglietto.",
+    "I posti della fila H sono poltrone VIP con un supplemento di 3,00 euro per posto.",
+    "La commissione di servizio online è di 0,80 euro per ogni biglietto.",
+    "Con il pagamento in cassa la commissione di servizio non si applica.",
+    "Il codice promozionale VISUALIZE15 riduce del 15 per cento la somma di biglietti e supplementi, esclusa la commissione di servizio.",
+    "Lo sconto è calcolato una sola volta sulla somma di biglietti e supplementi e arrotondato al centesimo, con i mezzi centesimi arrotondati per eccesso.",
+    "Un codice promozionale si applica una sola volta per prenotazione.",
+    "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto.",
+    "I prezzi sono mostrati in euro con due decimali, la virgola come separatore decimale e il simbolo dopo la cifra.",
+    "Il numero di biglietti è sempre uguale al numero di posti selezionati.",
+    "I posti occupati non si possono selezionare.",
+    "I posti E4, E5, E6 ed E7 sono occupati in ogni spettacolo.",
+    "Le file A e B sono interamente libere in ogni spettacolo, salvo i posti già prenotati dallo stesso browser.",
+    "Lo spettacolo delle 16:00 di Piccoli giganti in Sala 3 è sempre tutto esaurito.",
+    "La programmazione copre sette giorni a partire da oggi, nel fuso orario di Roma.",
+    "Tornando dalla pagina dei biglietti alla mappa dei posti la selezione resta invariata.",
+    "Scegliendo un altro spettacolo la selezione dei posti precedente viene azzerata.",
+    "Il pagamento in cassa è disponibile solo per prenotazioni fino a 4 biglietti.",
+    "Il pulsante di pagamento resta disabilitato mentre il pagamento è in corso.",
+    "Un pagamento approvato crea una sola prenotazione.",
+    "Il totale mostrato nella pagina di conferma coincide con il totale pagato.",
+    "La pagina Le mie prenotazioni mostra la stessa data e la stessa ora dello spettacolo prenotato.",
+    "I posti di una prenotazione confermata o da pagare in cassa risultano occupati per quello spettacolo.",
+    "Una prenotazione si può annullare fino a un'ora prima dell'inizio dello spettacolo.",
+    "Annullando una prenotazione i suoi posti tornano liberi.",
+    "Prenotazioni, ordine in corso e saldo delle carte regalo restano soltanto nel browser, quindi ogni nuova sessione del browser parte senza prenotazioni e con i saldi iniziali."
+  ]
+}

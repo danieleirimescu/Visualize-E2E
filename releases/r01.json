@@ -1,0 +1,2 @@
+{ "id": "r01", "based_on": "r00", "bugs": ["B01", "B05", "B14"], "changes": [], "fixed": [], "reintroduced": [],
+  "notes": "Primi difetti, evidenti: prezzo Ridotto, contatore dei posti, filtro 3D." }
