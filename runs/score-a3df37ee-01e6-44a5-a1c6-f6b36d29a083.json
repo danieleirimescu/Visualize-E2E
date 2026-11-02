@@ -1,0 +1,23 @@
+{
+  "trace": "a3df37ee-01e6-44a5-a1c6-f6b36d29a083",
+  "release": "r00",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-10-30T11:49:43.000Z",
+  "metrics": {
+    "bugs_active": 0,
+    "bugs_covered": 0,
+    "bugs_detected": 0,
+    "bugs_attributed": 0,
+    "bugs_suspected": 0,
+    "detection_recall": null,
+    "attribution_recall": null,
+    "sut_bug_precision": null,
+    "sut_bug_verdicts": 0,
+    "sut_bug_on_adjacent_rule": 0,
+    "false_positives": 0,
+    "tests_observed": 49,
+    "verdicts_total": 2
+  },
+  "per_bug": [],
+  "false_positives": []
+}

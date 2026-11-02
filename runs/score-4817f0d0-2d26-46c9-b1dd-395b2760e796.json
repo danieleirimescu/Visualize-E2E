@@ -1,0 +1,30 @@
+{
+  "trace": "4817f0d0-2d26-46c9-b1dd-395b2760e796",
+  "release": "r00",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-10-30T09:09:55.000Z",
+  "metrics": {
+    "bugs_active": 0,
+    "bugs_covered": 0,
+    "bugs_detected": 0,
+    "bugs_attributed": 0,
+    "bugs_suspected": 0,
+    "detection_recall": null,
+    "attribution_recall": null,
+    "sut_bug_precision": 0,
+    "sut_bug_verdicts": 1,
+    "sut_bug_on_adjacent_rule": 0,
+    "false_positives": 1,
+    "tests_observed": 38,
+    "verdicts_total": 4
+  },
+  "per_bug": [],
+  "false_positives": [
+    {
+      "test": "edge: una carta che scade nel mese corrente e ancora valida e il pagamento viene approvato",
+      "quote": "Una carta che scade nel mese corrente è ancora valida.",
+      "summary": "Candidato bug SUT da confermare in «edge: una carta che scade nel mese corrente e ancora valida e il pagamento viene approvato»: atteso No expiry error is shown for a card expiring in the current month, because the card is still valid, and the payment then proceeds., osservato The card-expiry-error element resolved and was visible for a card expiring in the current month, so toBeHidden failed. The snapshot of the element shows only a paragraph, without its text.. Mantenere il test come regression solo dopo conferma; non assumere che story e test siano già corretti.",
+      "hint": []
+    }
+  ]
+}
