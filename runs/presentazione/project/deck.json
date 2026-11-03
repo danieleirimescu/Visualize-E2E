@@ -1,0 +1,19 @@
+{
+  "v": 4,
+  "createdOnFiles": { "v": 1, "at": "2026-11-02T10:50:00Z" },
+  "lists": "css",
+  "title": "Visualize × LABBGEN",
+  "order": ["cover", "perche", "scopo", "pipeline", "visualize", "glossario", "bug-seminati", "livelli", "release", "verifica", "ciclo", "una-run", "punteggio", "stato", "andamento-r00", "run-r00-1", "run-r00-2", "run-r00-3", "revisione", "run-r00-4", "run-r00-5", "r01", "run-r01-1", "run-r01-2", "lacune", "funziona", "prossimi"],
+  "sections": {
+    "s1": { "description": "Il progetto: cosa sono Visualize e LABBGEN e perché servono insieme.", "start": "cover" },
+    "s2": { "description": "Il metodo: difetti seminati, release e misura.", "start": "bug-seminati" },
+    "s3": { "description": "L’andamento: i risultati run per run.", "start": "stato" },
+    "s4": { "description": "Le lezioni: lacune, punti di forza, prossimi passi.", "start": "lacune" }
+  },
+  "faces": {
+    "oswald": { "family": "Oswald", "href": "https://fonts.googleapis.com/css2?family=Oswald:wght@400..700&display=swap" },
+    "public-sans": { "family": "Public Sans", "href": "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" },
+    "jetbrains-mono": { "family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" }
+  },
+  "designSystems": []
+}

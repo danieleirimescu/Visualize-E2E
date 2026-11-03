@@ -1,0 +1,23 @@
+<section id="run-r00-1" data-transition="fade" style="background:#15171F;color:#F3EFE6;font-family:'Public Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#E3A33B;font-weight:600">Run per run · r00 · run 1 · 29 ottobre</p>
+<h2 style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:72px;font-weight:500;line-height:1.1;color:#F3EFE6">La prima suite: 35 test e un falso allarme</h2>
+</div>
+<div style="display:flex;gap:64px">
+<div style="flex:3;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#E3A33B;font-weight:600">Prima della run</p><p style="font-size:26px;line-height:1.45;color:#C9C4B8">Database svuotato: la pipeline parte da zero, senza suite e senza memoria.</p></div>
+<div style="display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#E3A33B;font-weight:600">Cosa è successo</p><p style="font-size:26px;line-height:1.45;color:#C9C4B8">3 test saltati perché lo spettacolo delle 15:00 era già iniziato. Il test della carta che scade questo mese controlla che un messaggio d’errore vuoto sia nascosto, ma è visibile: il triage accusa il sito.</p></div>
+<div style="display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#8FB0FF;font-weight:600">Cosa impariamo</p><p style="font-size:26px;line-height:1.45;color:#F3EFE6">Il primo falso allarme nasce da un test che verifica la cosa sbagliata. E l’ora della run cambia quali test si possono eseguire.</p></div>
+</div>
+<div style="flex:1.3;background:#20232D;border:1px solid #2E323E;border-radius:16px;padding:40px;display:grid;grid-template-columns:repeat(2, 1fr);gap:28px 24px;align-content:start">
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">35</p><p style="font-size:24px;color:#C9C4B8">test</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">80%</p><p style="font-size:24px;color:#C9C4B8">verdi</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">4</p><p style="font-size:24px;color:#C9C4B8">rossi</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#E9A273">1</p><p style="font-size:24px;color:#C9C4B8">falso positivo</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">24′</p><p style="font-size:24px;color:#C9C4B8">durata</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">0,19 $</p><p style="font-size:24px;color:#C9C4B8">costo</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#C9C4B8;font-family:'JetBrains Mono', 'Courier New', monospace">trace b899bf8b · memoria LABBGEN</p>
+<aside>La prima run su un sito senza difetti, a database vuoto. Quasi tutto funziona al primo colpo. L’unico verdetto di difetto è sbagliato: il test usa toBeHidden su un paragrafo d’errore che il sito tiene sempre in pagina, vuoto. Il Reflector legge «visibile» come contraddizione di «nessun errore» e accusa il sito.</aside>
+</section>

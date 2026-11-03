@@ -1,0 +1,26 @@
+<section id="verifica" data-transition="fade" style="background:#F5F1E8;color:#15171F;font-family:'Public Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#8A5200;font-weight:600">Il metodo</p>
+<h2 style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:72px;font-weight:500;line-height:1.1;color:#15171F">La verità si controlla prima della pipeline</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:32px">
+<div style="background:#FCFAF5;border:1px solid #E2DCCF;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:120px;line-height:1;color:#2D5BBF">42</p>
+<h3 style="font-size:32px;font-weight:700;color:#15171F">test di riferimento</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4A55">Scritti a mano, con l’orologio fissato. Su r00 passano tutti, anche sul sito pubblico.</p>
+</div>
+<div style="background:#FCFAF5;border:1px solid #E2DCCF;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:120px;line-height:1;color:#2D5BBF">28/28</p>
+<h3 style="font-size:32px;font-weight:700;color:#15171F">difetti colti</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4A55">Acceso da solo, ogni difetto fa fallire i suoi test su un’asserzione, mai su un timeout.</p>
+</div>
+<div style="background:#FCFAF5;border:1px solid #E2DCCF;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:120px;line-height:1;color:#2D5BBF">7/7</p>
+<h3 style="font-size:32px;font-weight:700;color:#15171F">workflow percorribili</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4A55">I passi che lo Scout ripete arrivano in fondo su ogni release, anche dopo i refactor.</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#4A4A55">Su r01, prima della run: sul sito pubblico falliscono <b>esattamente</b> i test di B01, B05 e B14.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6A6A72">Script nel repo Visualize: oracle, mutants, check:scout</p>
+<aside>Prima di chiedere alla pipeline di trovare i difetti, verifichiamo che i difetti si vedano davvero. La suite di riferimento è scritta a mano. Il controllo dei mutanti accende un difetto alla volta e pretende che i suoi test falliscano con un atteso e un ricevuto, perché un fallimento per timeout il triage lo leggerebbe come problema di ambiente. Infine si verifica che i percorsi che lo Scout esplora funzionino su ogni release.</aside>
+</section>

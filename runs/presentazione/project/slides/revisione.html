@@ -1,0 +1,20 @@
+<section id="revisione" data-transition="fade" style="background:#15171F;color:#F3EFE6;font-family:'Public Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#E3A33B;font-weight:600">Andamento · r00</p>
+<h2 style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:72px;font-weight:500;line-height:1.1;color:#F3EFE6">Due modi di rispondere alla pipeline</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="flex:1;background:#20232D;border:1px solid #2E323E;border-top:6px solid #D9773A;border-radius:16px;padding:48px;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#E9A273;font-weight:600">Run 3 · «il test è sbagliato»</p>
+<p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:120px;line-height:1;color:#F3EFE6">1 su 4</p>
+<p style="font-size:28px;line-height:1.45;color:#C9C4B8">test riscritti. Il modello ripropone lo stesso codice due volte, e il triage richiama difetto del sito il test della carta.</p>
+</div>
+<div style="flex:1;background:#20232D;border:1px solid #2E323E;border-top:6px solid #8FB0FF;border-radius:16px;padding:48px;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#8FB0FF;font-weight:600">Run 4 · «l’applicazione ha ragione»</p>
+<p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:120px;line-height:1;color:#F3EFE6">3 su 3</p>
+<p style="font-size:28px;line-height:1.45;color:#C9C4B8">test riscritti. Il comportamento corretto entra nella story, il test si riallinea, nessun falso positivo.</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#F3EFE6">Funziona solo il canale che riscrive la story, anche quando sbagliava solo il test.</p>
+<aside>Nel report ogni fallimento ha una scheda con tre risposte. Dopo la run 2 ho risposto «nessuno dei due, il test non verifica ciò che dichiara»: la decisione arriva al Translator, ma se il modello ripropone lo stesso codice nessuno lo ferma. Dopo la run 3 ho risposto «l’applicazione ha ragione», scrivendo il comportamento corretto: quel testo finisce nella story, e il Translator è obbligato a riallineare il test. Costo: la story si lega a fatti scritti da una persona.</aside>
+</section>

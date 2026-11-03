@@ -32,6 +32,10 @@ for (const e of entries) {
     else if (!quoteIsWholeSentences(e.rule, sentenceSet)) problems.push(`${e.id}: la regola non e' una frase intera del profilo: "${e.rule}"`);
     if (!e.oracle_tests?.length) problems.push(`${e.id}: nessun test di riferimento`);
   }
+  for (const r of e.downstream_rules ?? []) {
+    if (!quoteIsWholeSentences(r, sentenceSet)) problems.push(`${e.id}: regola a valle che non e' una frase intera del profilo: "${r}"`);
+    if (r === e.rule) problems.push(`${e.id}: la regola a valle ripete la regola del bug`);
+  }
   for (const t of [...(e.oracle_tests ?? []), ...(e.collateral_tests ?? [])]) if (!titles.has(t)) problems.push(`${e.id}: test di riferimento inesistente "${t}"`);
   for (const other of e.incompatible_with ?? []) if (!byId.has(other)) problems.push(`${e.id}: incompatibile con un id sconosciuto ${other}`);
   if (!['L1', 'L2', 'L3', 'L4', 'L5'].includes(e.level)) problems.push(`${e.id}: livello non valido ${e.level}`);

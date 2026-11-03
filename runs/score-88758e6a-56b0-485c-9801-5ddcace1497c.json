@@ -1,0 +1,61 @@
+{
+  "trace": "88758e6a-56b0-485c-9801-5ddcace1497c",
+  "release": "r01",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-11-02T10:18:50.000Z",
+  "metrics": {
+    "bugs_active": 3,
+    "bugs_covered": 3,
+    "bugs_detected": 3,
+    "bugs_attributed": 2,
+    "bugs_suspected": 0,
+    "detection_recall": 1,
+    "attribution_recall": 0.67,
+    "sut_bug_precision": 0.67,
+    "sut_bug_verdicts": 24,
+    "sut_bug_on_adjacent_rule": 1,
+    "sut_bug_on_downstream_rule": 7,
+    "false_positives": 0,
+    "tests_observed": 63,
+    "verdicts_total": 24
+  },
+  "per_bug": [
+    {
+      "id": "B01",
+      "kind": "bug",
+      "level": "L1",
+      "title": "Il Ridotto Over 65 costa quanto un Intero",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola a valle",
+      "test": "tre biglietti con tipologie Ridotto e Studente: il checkout mostra Paga ora 35,40 euro",
+      "outcome": "rilevato su una regola a valle, classificato sut_bug"
+    },
+    {
+      "id": "B05",
+      "kind": "bug",
+      "level": "L1",
+      "title": "Il contatore dei posti e' indietro di uno",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "deselezionare A5 lascia A6 e H6 selezionati e il contatore scende a 2",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B14",
+      "kind": "bug",
+      "level": "L2",
+      "title": "Il filtro 3D lascia passare gli spettacoli 2D",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "filtro Formato 3D mostra solo spettacoli in 3D, incluso Ultimo treno alle 22:50 in Sala 2",
+      "outcome": "attribuito"
+    }
+  ],
+  "false_positives": []
+}

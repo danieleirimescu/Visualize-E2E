@@ -14,6 +14,7 @@
     "sut_bug_precision": 0,
     "sut_bug_verdicts": 1,
     "sut_bug_on_adjacent_rule": 0,
+    "sut_bug_on_downstream_rule": 0,
     "false_positives": 1,
     "tests_observed": 35,
     "verdicts_total": 4

@@ -1,0 +1,61 @@
+{
+  "trace": "fc9e0b1f-dc02-4d6a-a433-99e3f158e8ac",
+  "release": "r01",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-11-03T09:12:54.000Z",
+  "metrics": {
+    "bugs_active": 3,
+    "bugs_covered": 3,
+    "bugs_detected": 3,
+    "bugs_attributed": 3,
+    "bugs_suspected": 0,
+    "detection_recall": 1,
+    "attribution_recall": 1,
+    "sut_bug_precision": 0.68,
+    "sut_bug_verdicts": 25,
+    "sut_bug_on_adjacent_rule": 1,
+    "sut_bug_on_downstream_rule": 7,
+    "false_positives": 0,
+    "tests_observed": 65,
+    "verdicts_total": 26
+  },
+  "per_bug": [
+    {
+      "id": "B01",
+      "kind": "bug",
+      "level": "L1",
+      "title": "Il Ridotto Over 65 costa quanto un Intero",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "cambiare la tipologia aggiorna subito prezzi e riepilogo (Ridotto A6, Studente H6)",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B05",
+      "kind": "bug",
+      "level": "L1",
+      "title": "Il contatore dei posti e' indietro di uno",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "selezionare A6 e A8 lasciando A7 libero fra due selezionati: Prosegui mostra errore e resta sulla mappa",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B14",
+      "kind": "bug",
+      "level": "L2",
+      "title": "Il filtro 3D lascia passare gli spettacoli 2D",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "filtro Formato 3D mostra solo spettacoli in 3D, incluso Ultimo treno alle 22:50 in Sala 2",
+      "outcome": "attribuito"
+    }
+  ],
+  "false_positives": []
+}

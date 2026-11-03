@@ -1,0 +1,20 @@
+<section id="r01" data-transition="fade" style="background:#F5F1E8;color:#15171F;font-family:'Public Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#8A5200;font-weight:600">Andamento · r01</p>
+<h2 style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:72px;font-weight:500;line-height:1.1;color:#15171F">Tre difetti accesi, tre rilevati</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="display:flex;flex-direction:column;gap:4px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:96px;line-height:1.05;color:#2D5BBF">3/3</p><p style="font-size:28px;color:#4A4A55">difetti rilevati</p></div>
+<div style="display:flex;flex-direction:column;gap:4px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:96px;line-height:1.05;color:#15171F">2/3</p><p style="font-size:28px;color:#4A4A55">con la regola giusta</p></div>
+<div style="display:flex;flex-direction:column;gap:4px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:96px;line-height:1.05;color:#2D5BBF">0</p><p style="font-size:28px;color:#4A4A55">falsi positivi</p></div>
+<div style="display:flex;flex-direction:column;gap:4px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:96px;line-height:1.05;color:#A3480F">24</p><p style="font-size:28px;color:#4A4A55">schede per una persona</p></div>
+</div>
+<table style="font-family:'Public Sans', Arial, sans-serif;font-size:28px;color:#15171F">
+<tr><th style="width:34%">Difetto</th><th style="width:14%;text-align:right">Test falliti</th><th style="width:52%">Regola citata dal triage</th></tr>
+<tr><td>B14 · il filtro 3D mostra un 2D</td><td style="text-align:right">5</td><td>Quella giusta</td></tr>
+<tr><td>B05 · il contatore segna uno in meno</td><td style="text-align:right">12</td><td>Giusta in 11, quella di un difetto vicino in 1</td></tr>
+<tr><td>B01 · il Ridotto costa come un Intero</td><td style="text-align:right">7</td><td>Totale e sconto, mai il prezzo del Ridotto</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6A6A72">Run 1 · 02/11/2026 · 63 test, 39 verdi, 24 falliti · 26 minuti · 0,18 $</p>
+<aside>Tutti i 24 fallimenti sono effetti veri dei tre difetti, e ognuno è stato classificato difetto del sito con richiesta di conferma. Su B01 la citazione è imprecisa: il triage cita le regole del totale e dello sconto, che sono calcolati correttamente su una somma sbagliata, invece della regola sul prezzo del Ridotto. Il difetto B05 fa fallire 12 test perché il contatore è verificato anche in test che servono ad altro.</aside>
+</section>

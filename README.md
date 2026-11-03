@@ -91,7 +91,8 @@ npm run score -- --trace <trace_id>
 L'abbinamento verdetto → bug segue un ordine di affidabilità, e il report dichiara quale ha usato:
 1. **Regola citata**: la citazione del triage è la frase del catalogo. È l'unico abbinamento che conta come "attribuito".
 2. **Regola adiacente**: cita la regola di un altro bug i cui test falliscono anche con questo acceso (`collateral_tests`). Il bug conta come rilevato, non come attribuito.
-3. **Test id nel ricevuto**: è solo indicativo. Un `sut_bug` che non cita la regola di un bug attivo è un falso positivo.
+3. **Regola a valle**: cita una regola il cui valore atteso il bug sposta senza violarla (`downstream_rules` nel catalogo). Esempio: con il Ridotto al prezzo dell'Intero, totale e sconto sono calcolati bene ma su una somma sbagliata. Il bug conta come rilevato, non come attribuito, e il verdetto non è un falso positivo.
+4. **Test id nel ricevuto**: è solo indicativo. Un `sut_bug` che non cita la regola di un bug attivo, né una adiacente o a valle, è un falso positivo.
 
 ## Limiti noti
 

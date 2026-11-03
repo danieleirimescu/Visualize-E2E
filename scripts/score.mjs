@@ -14,6 +14,10 @@
 //   regola citata          la citazione del triage e' la frase del catalogo per quel bug
 //   regola adiacente       cita la regola di un altro bug i cui test falliscono anche
 //                          con questo acceso (collateral_tests): rilevato, non attribuito
+//   regola a valle         cita una regola il cui valore atteso il bug sposta senza
+//                          violarla (downstream_rules: un Ridotto sbagliato sposta
+//                          totale e sconto, che restano calcolati bene): rilevato,
+//                          non attribuito, e non un falso positivo
 //   test id nel ricevuto   un test id del bug compare in cio' che il test ha ricevuto:
 //                          solo indicativo, mai "attribuito"
 // Precisione dei sut_bug = quelli che citano la regola di un bug attivo / tutti.
@@ -89,6 +93,8 @@ function matchVerdict(p) {
   const ruled = entries.filter((x) => x.kind === 'bug' && ruleHit(x, quoted));
   const adjacent = activeBugs.filter((a) => ruled.some((x) => x.oracle_tests.some((t) => a.collateral_tests?.includes(t))));
   if (adjacent.length) return { basis: 'regola adiacente', bugs: adjacent };
+  const downstream = activeBugs.filter((e) => (e.downstream_rules ?? []).some((r) => sentences(r).every((s) => quoted.has(s))));
+  if (downstream.length) return { basis: 'regola a valle', bugs: downstream };
   const received = receivedOf(p);
   const bySignal = active.filter((e) => e.signals.some((s) => s.length >= 6 && received.includes(s)));
   return { basis: bySignal.length ? 'test id nel ricevuto' : null, bugs: bySignal };
@@ -99,7 +105,7 @@ const verdicts = recommendations
   .filter((p) => p.failure_origin)
   .map((p) => ({ ...matchVerdict(p), p }));
 
-const BASIS_RANK = { 'regola citata': 0, 'regola adiacente': 1, 'test id nel ricevuto': 2 };
+const BASIS_RANK = { 'regola citata': 0, 'regola adiacente': 1, 'regola a valle': 2, 'test id nel ricevuto': 3 };
 const rank = (v) => BASIS_RANK[v.basis] * 2 + (v.p.failure_origin === 'sut_bug' ? 0 : 1);
 const suspected = (p) => p.suspected_sut_bug || (p.failure_origin === 'user_story_issue' && p.requires_human_confirmation);
 
@@ -121,6 +127,8 @@ const perBug = active.map((e) => {
     outcome = origin === 'sut_bug' ? 'attribuito' : suspected(best.p) ? 'sospetto, in coda per una persona' : `rilevato ma classificato ${origin}`;
   } else if (best.basis === 'regola adiacente') {
     outcome = `rilevato su una regola adiacente, classificato ${origin}`;
+  } else if (best.basis === 'regola a valle') {
+    outcome = `rilevato su una regola a valle, classificato ${origin}`;
   } else {
     outcome = `rilevato (abbinamento indicativo), classificato ${origin}`;
   }
@@ -134,10 +142,11 @@ const perBug = active.map((e) => {
 const sutBugVerdicts = verdicts.filter((v) => v.p.failure_origin === 'sut_bug');
 const attributedSutBugs = sutBugVerdicts.filter((v) => v.basis === 'regola citata');
 const adjacentSutBugs = sutBugVerdicts.filter((v) => v.basis === 'regola adiacente');
-// Un sut_bug che non cita la regola di un bug attivo (ne' una adiacente) e' un
-// falso positivo, anche se nel ricevuto compare un test id di un bug attivo.
+const downstreamSutBugs = sutBugVerdicts.filter((v) => v.basis === 'regola a valle');
+// Un sut_bug che non cita la regola di un bug attivo (ne' una adiacente o a valle)
+// e' un falso positivo, anche se nel ricevuto compare un test id di un bug attivo.
 const falsePositives = sutBugVerdicts
-  .filter((v) => v.basis !== 'regola citata' && v.basis !== 'regola adiacente')
+  .filter((v) => !['regola citata', 'regola adiacente', 'regola a valle'].includes(v.basis))
   .map((v) => ({ test: v.p.test_name, quote: quoteOf(v.p), summary: v.p.summary, hint: v.bugs.map((e) => e.id) }));
 const bugs = perBug.filter((b) => b.kind === 'bug');
 const ratio = (n, d) => (d ? Math.round((n / d) * 100) / 100 : null);
@@ -152,6 +161,7 @@ const metrics = {
   sut_bug_precision: ratio(attributedSutBugs.length, sutBugVerdicts.length),
   sut_bug_verdicts: sutBugVerdicts.length,
   sut_bug_on_adjacent_rule: adjacentSutBugs.length,
+  sut_bug_on_downstream_rule: downstreamSutBugs.length,
   false_positives: falsePositives.length,
   tests_observed: observed.length,
   verdicts_total: verdicts.length,
@@ -163,6 +173,6 @@ writeFileSync(path('runs', `score-${trace}.json`), `${JSON.stringify(result, nul
 
 console.log(`Run ${trace} contro ${releaseId} (${manifest.bugs.join(', ') || 'nessun bug'}${manifest.changes.length ? `; modifiche ${manifest.changes.join(', ')}` : ''})`);
 for (const b of perBug) console.log(`  ${b.id} ${b.level} ${b.covered ? 'coperto ' : 'scoperto'}  ${b.outcome}${b.basis ? ` [${b.basis}]` : ''}`);
-console.log(`Rilevati ${metrics.bugs_detected}/${metrics.bugs_active}, attribuiti ${metrics.bugs_attributed}/${metrics.bugs_active}, sospetti ${metrics.bugs_suspected}; sut_bug ${metrics.sut_bug_verdicts}, su regola adiacente ${metrics.sut_bug_on_adjacent_rule}, falsi positivi ${metrics.false_positives}.`);
+console.log(`Rilevati ${metrics.bugs_detected}/${metrics.bugs_active}, attribuiti ${metrics.bugs_attributed}/${metrics.bugs_active}, sospetti ${metrics.bugs_suspected}; sut_bug ${metrics.sut_bug_verdicts}, su regola adiacente ${metrics.sut_bug_on_adjacent_rule}, su regola a valle ${metrics.sut_bug_on_downstream_rule}, falsi positivi ${metrics.false_positives}.`);
 for (const fp of falsePositives) console.log(`  falso positivo: ${fp.test} :: ${quoteTokens(fp.quote).slice(0, 120)}`);
 console.log(`Dettaglio in runs/score-${trace}.json`);

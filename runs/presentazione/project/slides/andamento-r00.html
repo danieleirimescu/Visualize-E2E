@@ -1,0 +1,21 @@
+<section id="andamento-r00" data-transition="fade" style="background:#F5F1E8;color:#15171F;font-family:'Public Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#8A5200;font-weight:600">Andamento · r00</p>
+<h2 style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:72px;font-weight:500;line-height:1.1;color:#15171F">Cinque run su un sito senza difetti</h2>
+</div>
+<div style="display:flex;gap:64px;flex:1;align-items:end">
+<div style="flex:3;display:flex;align-items:end;gap:16px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:44px;color:#15171F">35</p><div style="width:112px;height:190px;background:#2D5BBF;border-radius:8px 8px 0 0"></div><p style="font-size:24px;color:#6A6A72">Run 1 · 29/10</p><p style="font-size:28px;font-weight:700;color:#15171F">80% verdi</p><p style="font-size:24px;color:#A3480F">1 falso positivo</p></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:44px;color:#15171F">38</p><div style="width:112px;height:206px;background:#2D5BBF;border-radius:8px 8px 0 0"></div><p style="font-size:24px;color:#6A6A72">Run 2 · 30/10</p><p style="font-size:28px;font-weight:700;color:#15171F">89% verdi</p><p style="font-size:24px;color:#A3480F">1 falso positivo</p></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:44px;color:#15171F">44</p><div style="width:112px;height:239px;background:#2D5BBF;border-radius:8px 8px 0 0"></div><p style="font-size:24px;color:#6A6A72">Run 3 · 30/10</p><p style="font-size:28px;font-weight:700;color:#15171F">93% verdi</p><p style="font-size:24px;color:#A3480F">1 falso positivo</p></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:44px;color:#15171F">49</p><div style="width:112px;height:266px;background:#2D5BBF;border-radius:8px 8px 0 0"></div><p style="font-size:24px;color:#6A6A72">Run 4 · 30/10</p><p style="font-size:28px;font-weight:700;color:#15171F">96% verdi</p><p style="font-size:24px;color:#2D5BBF">0 falsi positivi</p></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px"><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:44px;color:#15171F">59</p><div style="width:112px;height:320px;background:#2D5BBF;border-radius:8px 8px 0 0"></div><p style="font-size:24px;color:#6A6A72">Run 5 · 02/11</p><p style="font-size:28px;font-weight:700;color:#15171F">97% verdi</p><p style="font-size:24px;color:#2D5BBF">0 falsi positivi</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;padding:0 0 120px 0">
+<p style="font-size:32px;line-height:1.4;color:#15171F">La suite cresce a ogni run, e i test verdi salgono dall’80% al 97%.</p>
+<p style="font-size:28px;line-height:1.4;color:#4A4A55">L’unico falso positivo sparisce solo dopo una risposta umana che riscrive la story.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6A6A72">Barre: test generati per run. Fonte: memoria LABBGEN, punteggio score.mjs</p>
+<aside>Su r00 nessun difetto è acceso, quindi ogni fallimento è un errore della pipeline e ogni verdetto di difetto è un falso positivo. Il falso positivo delle prime tre run era sempre lo stesso: una carta che scade nel mese corrente, testata con toBeHidden su un paragrafo d’errore vuoto ma visibile. Il test è stato protetto e riprodotto identico finché una risposta umana non ha riscritto la story.</aside>
+</section>

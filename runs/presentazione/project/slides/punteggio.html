@@ -1,0 +1,23 @@
+<section id="punteggio" data-transition="fade" style="background:#F5F1E8;color:#15171F;font-family:'Public Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#8A5200;font-weight:600">Il metodo</p>
+<h2 style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:72px;font-weight:500;line-height:1.1;color:#15171F">Come si legge il punteggio</h2>
+</div>
+<div style="display:flex;gap:64px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<h3 style="font-size:32px;font-weight:700;color:#8A5200">Quattro misure per difetto</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A4A55"><b style="color:#15171F">Copertura:</b> la suite tocca gli elementi del difetto</p>
+<p style="font-size:28px;line-height:1.4;color:#4A4A55"><b style="color:#15171F">Rilevamento:</b> un test fallito gli è riconducibile</p>
+<p style="font-size:28px;line-height:1.4;color:#4A4A55"><b style="color:#15171F">Attribuzione:</b> il triage dice «difetto del sito» e cita la regola giusta</p>
+<p style="font-size:28px;line-height:1.4;color:#4A4A55"><b style="color:#15171F">Falsi positivi:</b> «difetto del sito» dove non c’è nessun difetto</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:32px;font-weight:700;color:#8A5200">Abbinare un verdetto a un difetto</h3>
+<div style="background:#FCFAF5;border:1px solid #E2DCCF;border-radius:12px;padding:20px 28px"><p style="font-size:26px;line-height:1.4;color:#4A4A55"><b style="color:#15171F">Regola citata</b> · attribuito</p></div>
+<div style="background:#FCFAF5;border:1px solid #E2DCCF;border-radius:12px;padding:20px 28px"><p style="font-size:26px;line-height:1.4;color:#4A4A55"><b style="color:#15171F">Regola adiacente</b>, di un difetto vicino · rilevato</p></div>
+<div style="background:#FCFAF5;border:1px solid #E2DCCF;border-radius:12px;padding:20px 28px"><p style="font-size:26px;line-height:1.4;color:#4A4A55"><b style="color:#15171F">Regola a valle</b>, un totale spostato dal prezzo · rilevato</p></div>
+<div style="background:#FCFAF5;border:1px solid #E2DCCF;border-radius:12px;padding:20px 28px"><p style="font-size:26px;line-height:1.4;color:#4A4A55"><b style="color:#15171F">Solo un test id nel ricevuto</b> · indicativo</p></div>
+</div>
+</div>
+<aside>Il punteggio legge i verdetti dalla memoria e li confronta con il catalogo della release online. L’attribuzione è severa: conta solo se il triage cita la frase esatta della regola violata. La «regola a valle» è stata aggiunta dopo la prima run su r01: con il Ridotto al prezzo dell’Intero, totale e sconto sono calcolati bene ma su una somma sbagliata, e un verdetto che cita quelle regole indica un difetto vero, non un falso positivo.</aside>
+</section>

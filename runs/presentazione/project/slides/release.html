@@ -1,0 +1,17 @@
+<section id="release" data-transition="fade" style="background:#15171F;color:#F3EFE6;font-family:'Public Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#E3A33B;font-weight:600">Il metodo</p>
+<h2 style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:72px;font-weight:500;line-height:1.1;color:#F3EFE6">Sette release, un piano</h2>
+</div>
+<table style="font-family:'Public Sans', Arial, sans-serif;font-size:26px;color:#F3EFE6">
+<tr><th style="width:10%">Release</th><th style="width:26%">Difetti accesi</th><th style="width:64%">Cosa mette alla prova</th></tr>
+<tr><td style="font-weight:700">r00</td><td>nessuno</td><td>Base pulita: ogni verdetto di difetto è un falso positivo</td></tr>
+<tr><td style="font-weight:700">r01</td><td>B01 · B05 · B14</td><td>Primi difetti evidenti: prezzo, contatore dei posti, filtro 3D</td></tr>
+<tr><td style="font-weight:700">r02</td><td>B01 · B14 · B17 · B20</td><td>B05 corretto; nuovi: selezione persa fra pagine, data delle prenotazioni</td></tr>
+<tr><td style="font-weight:700">r03</td><td>B14 · B17 · B10 · B23</td><td>B01 e B20 corretti; nuovi: commissione in cassa, posto isolato</td></tr>
+<tr><td style="font-weight:700">r04</td><td>B17</td><td>Release di correzione: i test protetti devono tornare verdi</td></tr>
+<tr><td style="font-weight:700">r05</td><td>solo cambiamenti</td><td>Refactor legittimi, nessun difetto: il test va adattato, non accusato</td></tr>
+<tr><td style="font-weight:700">r06</td><td>B01 · B19 · B28</td><td>Regressione: torna B01; nuovi: totale in conferma, doppio pagamento</td></tr>
+</table>
+<aside>Ogni release parte dalla precedente: alcuni difetti restano, altri vengono corretti, altri compaiono. Così si misura non solo se la pipeline trova un difetto, ma anche se si accorge che è stato corretto e se lo riconosce quando torna. r05 è la prova del contrario: il sito cambia in modo legittimo e la pipeline non deve gridare al difetto.</aside>
+</section>

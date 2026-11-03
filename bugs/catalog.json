@@ -9,6 +9,12 @@
       "workflow": "w-biglietti",
       "title": "Il Ridotto Over 65 costa quanto un Intero",
       "rule": "Il biglietto Ridotto Over 65 costa 7,00 euro.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto.",
+        "Il codice promozionale VISUALIZE15 riduce del 15 per cento la somma di biglietti e supplementi, esclusa la commissione di servizio.",
+        "Lo sconto è calcolato una sola volta sulla somma di biglietti e supplementi e arrotondato al centesimo, con i mezzi centesimi arrotondati per eccesso.",
+        "Cambiando la tipologia di un biglietto il suo prezzo e il riepilogo si aggiornano subito."
+      ],
       "observable": "ticket-price del posto con tipologia Ridotto mostra 9,50 € invece di 7,00 € (spettacolo 2D, fila non VIP)",
       "signals": [
         "ticket-price-",
@@ -32,6 +38,11 @@
       "workflow": "w-biglietti",
       "title": "Il supplemento 3D non entra nel totale",
       "rule": "Gli spettacoli in 3D hanno un supplemento di 2,00 euro per ogni biglietto.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto.",
+        "Il codice promozionale VISUALIZE15 riduce del 15 per cento la somma di biglietti e supplementi, esclusa la commissione di servizio.",
+        "Lo sconto è calcolato una sola volta sulla somma di biglietti e supplementi e arrotondato al centesimo, con i mezzi centesimi arrotondati per eccesso."
+      ],
       "observable": "su uno spettacolo 3D la riga del biglietto include il 3D ma summary-supplements mostra 0,00 € e il totale e' piu' basso di 2,00 € per biglietto",
       "signals": [
         "summary-supplements",
@@ -54,6 +65,9 @@
       "workflow": "w-biglietti",
       "title": "La commissione e' applicata una volta per ordine",
       "rule": "La commissione di servizio online è di 0,80 euro per ogni biglietto.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto."
+      ],
       "observable": "con 2 o piu' biglietti summary-fee resta 0,80 €",
       "signals": [
         "summary-fee",
@@ -83,6 +97,12 @@
       "workflow": "w-biglietti",
       "title": "Il prezzo Studente diventa NaN",
       "rule": "Il biglietto Studente costa 7,50 euro.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto.",
+        "Il codice promozionale VISUALIZE15 riduce del 15 per cento la somma di biglietti e supplementi, esclusa la commissione di servizio.",
+        "Lo sconto è calcolato una sola volta sulla somma di biglietti e supplementi e arrotondato al centesimo, con i mezzi centesimi arrotondati per eccesso.",
+        "Cambiando la tipologia di un biglietto il suo prezzo e il riepilogo si aggiornano subito."
+      ],
       "observable": "scegliendo Studente il prezzo della riga e il totale mostrano NaN €",
       "signals": [
         "ticket-price-",
@@ -130,6 +150,9 @@
       "workflow": "w-biglietti",
       "title": "Il codice promozionale si cumula",
       "rule": "Un codice promozionale si applica una sola volta per prenotazione.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto."
+      ],
       "observable": "applicando VISUALIZE15 due volte lo sconto raddoppia e il messaggio non dice che e' gia' applicato",
       "signals": [
         "promo-message",
@@ -154,6 +177,9 @@
       "workflow": "w-biglietti",
       "title": "Lo sconto si applica anche alla commissione",
       "rule": "Il codice promozionale VISUALIZE15 riduce del 15 per cento la somma di biglietti e supplementi, esclusa la commissione di servizio.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto."
+      ],
       "observable": "summary-discount e' il 15% di biglietti + supplementi + commissione",
       "signals": [
         "summary-discount",
@@ -223,6 +249,9 @@
       "workflow": "w-metodi-pagamento",
       "title": "Il pagamento in cassa mantiene la commissione",
       "rule": "Con il pagamento in cassa la commissione di servizio non si applica.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto."
+      ],
       "observable": "scegliendo Paga in cassa summary-fee resta 0,80 € per biglietto",
       "signals": [
         "summary-fee",
@@ -267,6 +296,11 @@
       "workflow": "w-biglietti",
       "title": "Le poltrone VIP non hanno supplemento",
       "rule": "I posti della fila H sono poltrone VIP con un supplemento di 3,00 euro per posto.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto.",
+        "Il codice promozionale VISUALIZE15 riduce del 15 per cento la somma di biglietti e supplementi, esclusa la commissione di servizio.",
+        "Lo sconto è calcolato una sola volta sulla somma di biglietti e supplementi e arrotondato al centesimo, con i mezzi centesimi arrotondati per eccesso."
+      ],
       "observable": "un posto della fila H costa come un posto normale",
       "signals": [
         "ticket-price-H",
@@ -586,6 +620,9 @@
       "workflow": "w-biglietti",
       "title": "Lo sconto e' arrotondato per difetto biglietto per biglietto",
       "rule": "Lo sconto è calcolato una sola volta sulla somma di biglietti e supplementi e arrotondato al centesimo, con i mezzi centesimi arrotondati per eccesso.",
+      "downstream_rules": [
+        "Il totale è la somma di biglietti, supplementi e commissione di servizio, meno lo sconto."
+      ],
       "observable": "un Intero 2D con VISUALIZE15: sconto 1,42 € invece di 1,43 €",
       "signals": [
         "summary-discount",
