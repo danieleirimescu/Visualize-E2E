@@ -1,2 +1,3 @@
 {"release":"r01","bugs":["B01","B05","B14"],"changes":[],"published_at":"2026-11-02T08:28:15.812Z","mode":"git","note":"online solo dopo commit, push e build di Netlify"}
 {"release":"r02","bugs":["B01","B14","B17","B20"],"changes":[],"published_at":"2026-11-03T11:20:45.315Z","mode":"git","note":"online solo dopo commit, push e build di Netlify"}
+{"release":"r03","bugs":["B14","B17","B10","B23"],"changes":[],"published_at":"2026-11-10T09:00:28.416Z","mode":"git","note":"online solo dopo commit, push e build di Netlify"}
