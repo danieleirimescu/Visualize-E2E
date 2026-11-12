@@ -1,0 +1,37 @@
+{
+  "trace": "daa7b35c-81b2-4403-9268-7fe79ef0398a",
+  "release": "r04",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-11-12T12:31:23.000Z",
+  "metrics": {
+    "bugs_active": 1,
+    "bugs_covered": 1,
+    "bugs_detected": 1,
+    "bugs_attributed": 1,
+    "bugs_suspected": 0,
+    "detection_recall": 1,
+    "attribution_recall": 1,
+    "sut_bug_precision": 1,
+    "sut_bug_verdicts": 1,
+    "sut_bug_on_adjacent_rule": 0,
+    "sut_bug_on_downstream_rule": 0,
+    "false_positives": 0,
+    "tests_observed": 75,
+    "verdicts_total": 1
+  },
+  "per_bug": [
+    {
+      "id": "B17",
+      "kind": "bug",
+      "level": "L3",
+      "title": "Tornando ai posti la selezione si perde",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "Torna ai posti mantiene la selezione e il ritorno ai biglietti mantiene tipologie e sconto",
+      "outcome": "attribuito"
+    }
+  ],
+  "false_positives": []
+}
