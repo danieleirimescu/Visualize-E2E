@@ -1,0 +1,73 @@
+{
+  "trace": "435a6237-dbd6-4d0a-828c-80e9da4707d3",
+  "release": "r02",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-11-06T09:50:47.000Z",
+  "metrics": {
+    "bugs_active": 4,
+    "bugs_covered": 3,
+    "bugs_detected": 4,
+    "bugs_attributed": 3,
+    "bugs_suspected": 0,
+    "detection_recall": 1,
+    "attribution_recall": 0.75,
+    "sut_bug_precision": 0.5,
+    "sut_bug_verdicts": 16,
+    "sut_bug_on_adjacent_rule": 0,
+    "sut_bug_on_downstream_rule": 8,
+    "false_positives": 0,
+    "tests_observed": 70,
+    "verdicts_total": 18
+  },
+  "per_bug": [
+    {
+      "id": "B01",
+      "kind": "bug",
+      "level": "L1",
+      "title": "Il Ridotto Over 65 costa quanto un Intero",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola a valle",
+      "test": "tre biglietti con tipologie Ridotto e Studente: il checkout mostra Paga ora 35,40 euro",
+      "outcome": "rilevato su una regola a valle, classificato sut_bug"
+    },
+    {
+      "id": "B14",
+      "kind": "bug",
+      "level": "L2",
+      "title": "Il filtro 3D lascia passare gli spettacoli 2D",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "filtro Formato 3D mostra solo spettacoli in 3D, incluso Ultimo treno alle 22:50 in Sala 2",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B17",
+      "kind": "bug",
+      "level": "L3",
+      "title": "Tornando ai posti la selezione si perde",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "Torna ai posti mantiene la selezione e il ritorno ai biglietti mantiene tipologie e sconto",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B20",
+      "kind": "bug",
+      "level": "L3",
+      "title": "Le mie prenotazioni mostra il giorno precedente",
+      "covered": false,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "storico: la prenotazione Il faro sommerso B3 compare in cima e si annulla con conferma",
+      "outcome": "attribuito"
+    }
+  ],
+  "false_positives": []
+}

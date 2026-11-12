@@ -1,0 +1,73 @@
+{
+  "trace": "38b31bdd-2633-47e9-9445-ae133e684137",
+  "release": "r03",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-11-10T09:22:53.000Z",
+  "metrics": {
+    "bugs_active": 4,
+    "bugs_covered": 4,
+    "bugs_detected": 4,
+    "bugs_attributed": 4,
+    "bugs_suspected": 0,
+    "detection_recall": 1,
+    "attribution_recall": 1,
+    "sut_bug_precision": 1,
+    "sut_bug_verdicts": 14,
+    "sut_bug_on_adjacent_rule": 0,
+    "sut_bug_on_downstream_rule": 0,
+    "false_positives": 0,
+    "tests_observed": 72,
+    "verdicts_total": 16
+  },
+  "per_bug": [
+    {
+      "id": "B14",
+      "kind": "bug",
+      "level": "L2",
+      "title": "Il filtro 3D lascia passare gli spettacoli 2D",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "filtro Formato 3D mostra solo spettacoli in 3D, incluso Ultimo treno alle 22:50 in Sala 2",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B17",
+      "kind": "bug",
+      "level": "L3",
+      "title": "Tornando ai posti la selezione si perde",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "Torna ai posti mantiene la selezione e il ritorno ai biglietti mantiene tipologie e sconto",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B10",
+      "kind": "bug",
+      "level": "L2",
+      "title": "Il pagamento in cassa mantiene la commissione",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "pagamento in cassa: nessun altro campo, commissione non applicata e stato Da pagare in cassa",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B23",
+      "kind": "bug",
+      "level": "L4",
+      "title": "Il posto singolo isolato non e' bloccato",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "proseguire con un posto singolo libero fra due posti selezionati resta sulla mappa con errore",
+      "outcome": "attribuito"
+    }
+  ],
+  "false_positives": []
+}

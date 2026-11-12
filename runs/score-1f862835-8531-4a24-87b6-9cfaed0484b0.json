@@ -1,0 +1,73 @@
+{
+  "trace": "1f862835-8531-4a24-87b6-9cfaed0484b0",
+  "release": "r03",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-11-10T09:45:43.000Z",
+  "metrics": {
+    "bugs_active": 4,
+    "bugs_covered": 4,
+    "bugs_detected": 4,
+    "bugs_attributed": 4,
+    "bugs_suspected": 0,
+    "detection_recall": 1,
+    "attribution_recall": 1,
+    "sut_bug_precision": 1,
+    "sut_bug_verdicts": 14,
+    "sut_bug_on_adjacent_rule": 0,
+    "sut_bug_on_downstream_rule": 0,
+    "false_positives": 0,
+    "tests_observed": 73,
+    "verdicts_total": 17
+  },
+  "per_bug": [
+    {
+      "id": "B14",
+      "kind": "bug",
+      "level": "L2",
+      "title": "Il filtro 3D lascia passare gli spettacoli 2D",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "filtro Formato torna a Tutti i formati e riporta gli spettacoli 2D dopo il 3D",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B17",
+      "kind": "bug",
+      "level": "L3",
+      "title": "Tornando ai posti la selezione si perde",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "Torna ai posti mantiene la selezione e il ritorno ai biglietti mantiene tipologie e sconto",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B10",
+      "kind": "bug",
+      "level": "L2",
+      "title": "Il pagamento in cassa mantiene la commissione",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "pagamento in cassa su 39,90 euro (tre biglietti): nessun campo carta e totale 37,50 senza commissione",
+      "outcome": "attribuito"
+    },
+    {
+      "id": "B23",
+      "kind": "bug",
+      "level": "L4",
+      "title": "Il posto singolo isolato non e' bloccato",
+      "covered": true,
+      "detected": true,
+      "origin": "sut_bug",
+      "basis": "regola citata",
+      "test": "selezionare A6 e A8 lasciando A7 libero fra due selezionati: Prosegui mostra errore e resta sulla mappa",
+      "outcome": "attribuito"
+    }
+  ],
+  "false_positives": []
+}
