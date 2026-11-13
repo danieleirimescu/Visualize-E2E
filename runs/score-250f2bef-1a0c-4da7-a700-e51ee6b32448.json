@@ -1,0 +1,74 @@
+{
+  "trace": "250f2bef-1a0c-4da7-a700-e51ee6b32448",
+  "release": "r05",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-11-12T13:53:41.000Z",
+  "metrics": {
+    "bugs_active": 0,
+    "bugs_covered": 0,
+    "bugs_detected": 0,
+    "bugs_attributed": 0,
+    "bugs_suspected": 0,
+    "detection_recall": null,
+    "attribution_recall": null,
+    "sut_bug_precision": 0,
+    "sut_bug_verdicts": 2,
+    "sut_bug_on_adjacent_rule": 0,
+    "sut_bug_on_downstream_rule": 0,
+    "false_positives": 2,
+    "tests_observed": 76,
+    "verdicts_total": 15
+  },
+  "per_bug": [
+    {
+      "id": "C01",
+      "kind": "change",
+      "level": "L2",
+      "title": "Test id rinominati su mappa e biglietti",
+      "covered": true,
+      "detected": false,
+      "origin": "selector_issue",
+      "basis": "test id nel ricevuto",
+      "test": "cliccare l'orario 20:30 3D Sala 2 di Domani apre la mappa dei posti di quello spettacolo",
+      "outcome": "adattamento richiesto, classificato selector_issue"
+    },
+    {
+      "id": "C02",
+      "kind": "change",
+      "level": "L1",
+      "title": "Testi dei pulsanti riformulati",
+      "covered": true,
+      "detected": false,
+      "origin": "selector_issue",
+      "basis": "test id nel ricevuto",
+      "test": "la mappa mostra 80 posti, il Prosegui disabilitato senza selezione e il toggle dei posti",
+      "outcome": "adattamento richiesto, classificato selector_issue"
+    },
+    {
+      "id": "C03",
+      "kind": "change",
+      "level": "L2",
+      "title": "Riepilogo rifatto come tabella",
+      "covered": true,
+      "detected": false,
+      "origin": "test_code_issue",
+      "basis": "test id nel ricevuto",
+      "test": "tre biglietti su A5, A6 e A7: Ridotto e Studente, sconto VISUALIZE15 di 4,50 euro e Paga ora 27,90 euro",
+      "outcome": "adattamento richiesto, classificato test_code_issue"
+    }
+  ],
+  "false_positives": [
+    {
+      "test": "cambiare la tipologia aggiorna subito prezzi e riepilogo (Ridotto A6, Studente H6)",
+      "quote": "Il biglietto Ridotto Over 65 costa 7,00 euro.",
+      "summary": "Candidato bug SUT da confermare in «cambiare la tipologia aggiorna subito prezzi e riepilogo (Ridotto A6, Studente H6)»: atteso After changing A6 to Ridotto Over 65, the ticket price becomes 9,00 euro (7,00 plus the 2,00 3D supplement)., osservato The failure signal is an assertion mismatch on the ticket price after changing ticket types, with no reason string in this bundle. The previous triage recorded the observed A6 price as 11,50 euro, the Intero price plus the 3D supplement, not the 9,00 euro the rule gives for Ridotto Over 65.. Mantenere il test come regression solo dopo conferma; non assumere che story e test siano già corretti.",
+      "hint": []
+    },
+    {
+      "test": "il codice VISUALIZE15 mostra la conferma e lo sconto di 4,95 euro nel riepilogo",
+      "quote": "Il codice promozionale VISUALIZE15 riduce del 15 per cento la somma di biglietti e supplementi, esclusa la commissione di servizio.",
+      "summary": "Candidato bug SUT da confermare in «il codice VISUALIZE15 mostra la conferma e lo sconto di 4,95 euro nel riepilogo»: atteso With VISUALIZE15 applied to tickets of 33,00 euro (including supplements), the discount is 4,95 euro (15 percent of the ticket sum)., osservato The failure signal is an assertion mismatch on the discount, with no reason string in this bundle. The previous triage recorded an observed discount of -5,33 euro, which contradicts 4,95 euro.. Mantenere il test come regression solo dopo conferma; non assumere che story e test siano già corretti.",
+      "hint": []
+    }
+  ]
+}

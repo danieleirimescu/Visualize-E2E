@@ -1,0 +1,61 @@
+{
+  "trace": "8f36ac94-f293-4fb2-bb5c-8297af3ac9fd",
+  "release": "r05",
+  "api": "http://127.0.0.1:8000",
+  "run_started_at": "2026-11-12T14:20:47.000Z",
+  "metrics": {
+    "bugs_active": 0,
+    "bugs_covered": 0,
+    "bugs_detected": 0,
+    "bugs_attributed": 0,
+    "bugs_suspected": 0,
+    "detection_recall": null,
+    "attribution_recall": null,
+    "sut_bug_precision": null,
+    "sut_bug_verdicts": 0,
+    "sut_bug_on_adjacent_rule": 0,
+    "sut_bug_on_downstream_rule": 0,
+    "false_positives": 0,
+    "tests_observed": 81,
+    "verdicts_total": 15
+  },
+  "per_bug": [
+    {
+      "id": "C01",
+      "kind": "change",
+      "level": "L2",
+      "title": "Test id rinominati su mappa e biglietti",
+      "covered": false,
+      "detected": false,
+      "origin": null,
+      "basis": null,
+      "test": null,
+      "outcome": "nessun fallimento riconducibile"
+    },
+    {
+      "id": "C02",
+      "kind": "change",
+      "level": "L1",
+      "title": "Testi dei pulsanti riformulati",
+      "covered": true,
+      "detected": false,
+      "origin": "selector_issue",
+      "basis": "test id nel ricevuto",
+      "test": "la mappa mostra 80 posti, il Prosegui disabilitato senza selezione e il toggle dei posti",
+      "outcome": "adattamento richiesto, classificato selector_issue"
+    },
+    {
+      "id": "C03",
+      "kind": "change",
+      "level": "L2",
+      "title": "Riepilogo rifatto come tabella",
+      "covered": true,
+      "detected": false,
+      "origin": null,
+      "basis": null,
+      "test": null,
+      "outcome": "nessun fallimento riconducibile"
+    }
+  ],
+  "false_positives": []
+}

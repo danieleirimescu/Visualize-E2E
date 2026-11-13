@@ -1,0 +1,23 @@
+<section id="run-r05-2" data-transition="fade" style="background:#15171F;color:#F3EFE6;font-family:'Public Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#E3A33B;font-weight:600">Run per run · r05 · run 2 · 12 novembre</p>
+<h2 style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:72px;font-weight:500;line-height:1.1;color:#F3EFE6">I test si adattano a metà, ma i falsi allarmi spariscono</h2>
+</div>
+<div style="display:flex;gap:64px">
+<div style="flex:3;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#E3A33B;font-weight:600">Prima della run</p><p style="font-size:26px;line-height:1.45;color:#C9C4B8">Stessa release r05: sito sano ma ritoccato. Nessuna scheda di revisione ha avuto risposta e le protezioni sui test dei difetti già corretti sono rimaste attive.</p></div>
+<div style="display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#E3A33B;font-weight:600">Cosa è successo</p><p style="font-size:26px;line-height:1.45;color:#C9C4B8">Stavolta i test nuovi sono stati tenuti: 51 verdi, 15 rossi, 15 saltati. Nel codice però restano i vecchi nomi «Prosegui» e «Paga ora». Nessun rosso è chiamato difetto del sito.</p></div>
+<div style="display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#8FB0FF;font-weight:600">Cosa impariamo</p><p style="font-size:26px;line-height:1.45;color:#F3EFE6">La correzione dei nomi è stata respinta dai controlli, e 7 test protetti non si possono riparare. I tentativi respinti costano: da 0,16 a 0,60 $ per una run.</p></div>
+</div>
+<div style="flex:1.3;background:#20232D;border:1px solid #2E323E;border-radius:16px;padding:40px;display:grid;grid-template-columns:repeat(2, 1fr);gap:28px 24px;align-content:start">
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">81</p><p style="font-size:24px;color:#C9C4B8">test</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#8FB0FF">63%</p><p style="font-size:24px;color:#C9C4B8">verdi</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">15</p><p style="font-size:24px;color:#C9C4B8">rossi</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#8FB0FF">0</p><p style="font-size:24px;color:#C9C4B8">falsi positivi</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">26′</p><p style="font-size:24px;color:#C9C4B8">durata</p></div>
+<div><p style="font-family:Oswald, 'Arial Narrow', sans-serif;font-size:64px;line-height:1.1;color:#F3EFE6">0,60 $</p><p style="font-size:24px;color:#C9C4B8">costo</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#C9C4B8;font-family:'JetBrains Mono', 'Courier New', monospace">trace 8f36ac94 · memoria LABBGEN</p>
+<aside>Seconda run sulla release senza difetti. I test verdi salgono da 26 a 51 perché questa volta i test nuovi non sono stati scartati. I rossi restano 15: 7 falliti e 8 scaduti per tempo, quasi tutti perché cercano ancora i pulsanti con il nome vecchio. Il triage non chiama più nessun rosso difetto del sito: 6 li attribuisce al selettore, 4 al codice del test, 5 restano senza una causa. Il costo quasi quadruplica per i tentativi di correzione respinti uno dopo l’altro.</aside>
+</section>
